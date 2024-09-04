@@ -12,11 +12,11 @@ class ApiService {
     private val logger = LoggerFactory.getLogger(ApiService::class.java)
 
     @Retryable(
-        value = [ApiException::class],
+        retryFor = [ApiException::class],
         maxAttempts = 3,
         backoff = Backoff(2000)
     )
-    fun callExternalApi() {
+    fun callExternalApi(): String {
         logger.info("Calling external api...")
         throw ApiException("Error calling external api")
     }
